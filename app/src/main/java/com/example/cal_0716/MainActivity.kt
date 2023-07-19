@@ -2,13 +2,8 @@ package com.example.cal_0716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.widget.TextViewCompat
-import com.example.cal_0716.R
-import java.lang.NumberFormatException
-import com.example.cal_0716.operate
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         var btnP : Button = findViewById(R.id.buttonP)
 
         var btnOper : String = "";
-
 
         btn0.setOnClickListener {
 //            if(""==tv2.text.toString() || "0"==tv2.text.toString()){
