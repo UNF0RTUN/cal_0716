@@ -13,6 +13,9 @@ class MainActivity : AppCompatActivity() {
         val oper = operate();
         val dot = decimalDot();
         val btnNum = btnNum();
+        val allC = allClear();
+        val operSet = operSetting();
+        val btnRlst = btnRlst();
 
         var tv1 : TextView = findViewById(R.id.textView1)
         var tv2 : TextView = findViewById(R.id.textView2)
@@ -83,88 +86,27 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnC.setOnClickListener {
-            tv2.text = ""
-            tv1.text = ""
+            allC.clear(tv2,tv1);
         }
 
         btnPl.setOnClickListener {
-            var plus = "+"
-            var num1 = tv1.text.toString()
-            var num2 = tv2.text.toString()
-            if(""==num1){
-                tv1.text = tv2.text
-                tv2.text = ""
-                btnOper = "+";
-            } else if(""==num2){
-                btnOper = "+";
-            } else {
-                var rlst = oper.result(num1,num2,plus);
-                tv1.text = rlst.toString();
-                tv2.text = ""
-            }
+            operSet.operSet(tv1,tv2,btnPl);
         }
 
         btnMi.setOnClickListener {
-            var minus = "-"
-            var num1 = tv1.text.toString()
-            var num2 = tv2.text.toString()
-            if(""==num1){
-                tv1.text = tv2.text
-                tv2.text = ""
-                btnOper = "-";
-            } else if(""==num2){
-                btnOper = "-";
-            } else {
-                var rlst = oper.result(num1,num2,minus);
-                tv1.text = rlst.toString();
-                tv2.text = ""
-            }
+            operSet.operSet(tv1,tv2,btnMi);
         }
 
         btnSr.setOnClickListener {
-            var star = "*"
-            var num1 = tv1.text.toString()
-            var num2 = tv2.text.toString()
-            if(""==num1){
-                tv1.text = tv2.text
-                tv2.text = ""
-                btnOper = "*";
-            } else if(""==num2){
-                btnOper = "*";
-            } else {
-                var rlst = oper.result(num1,num2,star);
-                tv1.text = rlst.toString();
-                tv2.text = ""
-            }
+            operSet.operSet(tv1,tv2,btnSr);
         }
 
         btnSl.setOnClickListener {
-            var slash = "/"
-            var num1 = tv1.text.toString()
-            var num2 = tv2.text.toString()
-            if(""==num1){
-                tv1.text = tv2.text
-                tv2.text = ""
-                btnOper = "/";
-            } else if(""==num2){
-                btnOper = "/";
-            } else {
-                var rlst = oper.result(num1,num2,slash);
-                tv1.text = rlst.toString();
-                tv2.text = ""
-            }
+            operSet.operSet(tv1,tv2,btnSl);
         }
 
         btnRslt.setOnClickListener {
-            var num1 = tv1.text.toString()
-            var num2 = tv2.text.toString()
-            if(""==num1||""==num2){
-                //결과 없음
-            } else {
-                var rlst = oper.result(num1,num2,btnOper);
-                tv1.text = rlst.toString();
-                tv2.text = ""
-            }
+            btnRlst.calRlst(tv1,tv2, operSet);
         }
 
         btnP.setOnClickListener {
