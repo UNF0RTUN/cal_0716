@@ -7,7 +7,7 @@ class btnRlst {
 
     var oper = operate();
 
-    fun calRlst(tv2: TextView, tv1: TextView,opSet : operSetting) {
+    fun calRlst(tv1: TextView, tv2: TextView,opSet : operSetting) {
 
         var btnOper = opSet.btnOperString;
         var num1 = tv1.text.toString()

@@ -1,5 +1,6 @@
 package com.example.cal_0716
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,11 +12,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val oper = operate();
-        val dot = decimalDot();
-        val btnNum = btnNum();
-        val allC = allClear();
-        val operSet = operSetting();
-        val btnRlst = btnRlst();
+        val dot = decimalDot(); //소수점
+        val btnNum = btnNum(); //숫자버튼
+        val allC = allClear(); //화면 클리어
+        val operSet = operSetting(); //연산자 세팅 및 연산자 계산
+        val btnRlst = btnRlst(); //결과버튼
 
         var tv1 : TextView = findViewById(R.id.textView1)
         var tv2 : TextView = findViewById(R.id.textView2)
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         var btnSl : Button = findViewById(R.id.buttonSl)
         var btnRslt : Button = findViewById(R.id.btnResult)
         var btnP : Button = findViewById(R.id.buttonP)
+        var tv3 : TextView = findViewById(R.id.textView3)
 
         var btnOper : String = "";
 
@@ -111,6 +113,11 @@ class MainActivity : AppCompatActivity() {
 
         btnP.setOnClickListener {
            dot.decimalSet(tv2);
+        }
+
+        tv3.setOnClickListener {
+            val intt = Intent(applicationContext , apiMainActivity::class.java)
+            startActivity(intt);
         }
 
     }
