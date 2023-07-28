@@ -28,49 +28,57 @@ class apiConnectTest {
         }
 
         var apiURL : String = "https://openapi.naver.com/v1/search/news?query="+serachText+"&display=1&sort=date"; //json 결과
-        //var apiURL : String = "https://openapi.naver.com/v1/search/news.xml?query="+serachText+"?sort=date"; //xml결과
+        //var apiURL : String = "https://openapi.naver.com/v1/search/news.xml?query="+serachText+"&sort=date"; //xml결과
 
         var headerMap = HashMap<String,String>()
         headerMap.put("X-Naver-Client-Id",clientId);
         headerMap.put("X-Naver-Client-Secret",clientSecret);
 
-        //tv2.text = apiURL;
-        var newsBody : String = getNews(apiURL,headerMap);
-
-        tv2.text = newsBody
+        getNews(apiURL,headerMap,tv2);
+        //tv2.text = newsBody
     }
 
 
 
-    private fun getNews(apiUrl : String, header : HashMap<String,String>): String {
+    private fun getNews(apiUrl : String, header : HashMap<String,String>, tv2 : TextView){
+        //Log.d("result2","답2")
         val url = URL(apiUrl);
         val con = url.openConnection() as HttpURLConnection;
         var rlst : String = "";
         try {
             con.requestMethod = "GET"
+            for((key,value) in header){
+                con.setRequestProperty(key,value)
+            }
             thread(start = true){
+                //Log.d("thread",url.toString())
                 if(con.responseCode == HttpURLConnection.HTTP_OK){
-                    rlst = "성공!"
-//                    var rederRlst = InputStreamReader(con.inputStream)
-//                    var buffered = BufferedReader(rederRlst)
-//
-//                    val content = StringBuilder()
-//                    while(true){
-//                        val data = buffered.readLine() ?: break
-//                        content.append(data)
-//                    }
-//                    buffered.close()
-//                    con.disconnect()
-//                    rlst = "${content}"
+                    //Log.d("여기 어디",con.responseCode.toString())
+                    //rlst = "성공!"
+                    var rederRlst = InputStreamReader(con.inputStream)
+                    var buffered = BufferedReader(rederRlst)
+
+                    val content = StringBuilder()
+                    while(true){
+                        val data = buffered.readLine() ?: break
+                        content.append(data)
+                    }
+                    buffered.close()
+                    con.disconnect()
+                    rlst = "${content}"
+                    tv2.text = rlst;
                 } else {
+                    //Log.d("여기 어디",con.responseCode.toString())
                     rlst = "실패"
+                    tv2.text = rlst;
                 }
 
             }//thread 종료
-            return rlst;
+            Log.d("도착",rlst)
+
         } catch (ex:IOException){
-            //throw RuntimeException("URL연결 실패");
-            return "연결실패";
+            throw RuntimeException("URL연결 실패");
+
         }
 
     }
