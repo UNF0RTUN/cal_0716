@@ -2,6 +2,8 @@ package com.example.cal_0716
 
 import android.util.Log
 import android.widget.TextView
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
@@ -66,7 +68,12 @@ class apiConnectTest {
                     buffered.close()
                     con.disconnect()
                     rlst = "${content}"
-                    tv2.text = rlst;
+                    val testCont = JSONObject(content.toString())
+                    //val title : String = testCont.getJSONObject("items").toString()
+                    val arryCont = testCont.getJSONArray("items").toString()
+                   // val  titlsCont = arryCont.get(0).toString()
+                    Log.d("title",arryCont)
+                    tv2.text = arryCont;
                 } else {
                     //Log.d("여기 어디",con.responseCode.toString())
                     rlst = "실패"
