@@ -13,6 +13,7 @@ import java.lang.StringBuilder
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.util.Objects
 import kotlin.concurrent.thread
 
 class apiConnectTest {
@@ -29,7 +30,7 @@ class apiConnectTest {
             throw RuntimeException("인코딩 실패");
         }
 
-        var apiURL : String = "https://openapi.naver.com/v1/search/news?query="+serachText+"&display=1&sort=date"; //json 결과
+        var apiURL : String = "https://openapi.naver.com/v1/search/news?query="+serachText+"&display=10&sort=date"; //json 결과
         //var apiURL : String = "https://openapi.naver.com/v1/search/news.xml?query="+serachText+"&sort=date"; //xml결과
 
         var headerMap = HashMap<String,String>()
@@ -68,14 +69,24 @@ class apiConnectTest {
                     buffered.close()
                     con.disconnect()
                     rlst = "${content}"
+
                     val testCont = JSONObject(content.toString())
                     //val title : String = testCont.getJSONObject("items").toString()
-                    val arryCont = testCont.getJSONArray("items").toString()
-                   // val  titlsCont = arryCont.get(0).toString()
-                    Log.d("title",arryCont)
-                    tv2.text = arryCont;
+                    val arryCont = testCont.getJSONArray("items")
+                    val arryInt = arryCont.length().toInt()
+                    //var listRlst : String = "";
+                    var totRlst = StringBuilder()
+
+                    for (i in 0 until arryInt){
+
+                        val titleCont :JSONObject?  = arryCont.getJSONObject(i)
+                        val j : Int = i+1
+                        totRlst.append(""+ j + ". "+ titleCont?.get("title") + "\n")
+                    }
+
+                    Log.d("노답 :", arryCont.toString())
+                    tv2.text = totRlst;
                 } else {
-                    //Log.d("여기 어디",con.responseCode.toString())
                     rlst = "실패"
                     tv2.text = rlst;
                 }
