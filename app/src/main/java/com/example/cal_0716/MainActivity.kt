@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         val operSet = operSetting(); //연산자 세팅 및 연산자 계산
         val btnRlst = btnRlst(); //결과버튼
 
-        var tv1 : TextView = findViewById(R.id.textView1)
+        var tv1 : TextView = findViewById(R.id.textViewList1)
         var tv2 : TextView = findViewById(R.id.textView2)
         var btn0 : Button = findViewById(R.id.button0)
         var btn1 : Button = findViewById(R.id.button1)

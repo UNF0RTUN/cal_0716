@@ -204,7 +204,7 @@
         app:layout_constraintVertical_bias="0.475" />
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/textViewList1"
         android:layout_width="350dp"
         android:layout_height="72dp"
         android:layout_marginTop="50dp"
@@ -223,7 +223,7 @@
         android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView1" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewList1" />
 
     <Button
         android:id="@+id/btnResult"
